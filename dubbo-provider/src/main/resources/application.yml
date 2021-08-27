@@ -1,0 +1,16 @@
+server:
+  port: 8082
+# dubbo 配置
+dubbo:
+  application:
+    id: dubbo-provider
+    name: dubbo-provider
+    qos-port: 22222
+  # dubbo 注册中心地址
+  registry:
+    address: zookeeper://localhost:2181
+  # 服务提供者的协议名和端口
+  protocol:
+    server: true
+    name: dubbo
+    port: 18848
