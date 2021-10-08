@@ -1,4 +1,6 @@
-package com.jsy.service;
+package com.jsy.service.aa;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @Author: Song yang Ji
@@ -9,4 +11,6 @@ package com.jsy.service;
 
 public interface HelloService {
     String sayHello();
+
+    CompletableFuture<String> sayHelloAsync();
 }

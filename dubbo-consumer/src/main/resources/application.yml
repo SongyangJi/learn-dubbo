@@ -14,4 +14,4 @@ dubbo:
     name: dubbo
     port: 28848
   consumer:
-    timeout: 10000
+    timeout: 20000

@@ -1,12 +1,15 @@
-package com.jsy.service.impl;
+package com.jsy.me.impl;
 
 
-import com.jsy.service.HelloService;
-import lombok.extern.slf4j.Slf4j;
+import com.jsy.service.aa.HelloService;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 
 /**
  * @Author: Song yang Ji
@@ -15,9 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Description:
  */
 
-@Service
-// com.alibaba.dubbo.config.annotation.Service 是 Alibaba 包下的注解，表明这是 dubbo 服务提供者
-@com.alibaba.dubbo.config.annotation.Service
+@Component
+@DubboService
 public class HelloServiceImpl implements HelloService {
 
     AtomicInteger integer = new AtomicInteger();
@@ -26,10 +28,20 @@ public class HelloServiceImpl implements HelloService {
     public String sayHello() {
         System.out.println("Dubbo 服务者");
         try {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(4);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+//        int x = 1/0;
+//        System.out.println(x);
+
         return "Dubbo 服务者: Hello world " + integer.incrementAndGet();
+    }
+
+    @Override
+    public CompletableFuture<String> sayHelloAsync() {
+        return CompletableFuture.supplyAsync(this::sayHello);
     }
 }
